@@ -42,7 +42,6 @@ contract EpicNFT is ERC721URIStorage {
         view
         returns (string memory)
     {
-        // I seed the random generator. More on this in the lesson.
         uint256 rand = random(
             string(abi.encodePacked("FIRST_WORD", Strings.toString(tokenId)))
         );
@@ -75,7 +74,7 @@ contract EpicNFT is ERC721URIStorage {
         string memory second = pickRandomSecondWord(newItemId);
         string memory combinedWord = string(abi.encodePacked(first, second));
 
-        // I concatenate it all together, and then close the <text> and <svg> tags.
+        // Concatenate it all together, and then close the <text> and <svg> tags.
         string memory finalSvg = string(
             abi.encodePacked(baseSvg, combinedWord, "</text></svg>")
         );
@@ -85,10 +84,10 @@ contract EpicNFT is ERC721URIStorage {
                 string(
                     abi.encodePacked(
                         '{"name": "',
-                        // We set the title of our NFT as the generated word.
+                        // set the title of our NFT as the generated word.
                         combinedWord,
                         '", "description": "Generate random words in nft that can match a popular show or even my name!.", "image": "data:image/svg+xml;base64,',
-                        // We add data:image/svg+xml;base64 and then append our base64 encode our svg.
+                        // add data:image/svg+xml;base64 and then append our base64 encode our svg.
                         Base64.encode(bytes(finalSvg)),
                         '"}'
                     )
@@ -100,11 +99,10 @@ contract EpicNFT is ERC721URIStorage {
             abi.encodePacked("data:application/json;base64,", json)
         );
 
-        // Min the NFT to the user address
+        // Mint the NFT to the user address
         _safeMint(msg.sender, newItemId);
 
         // Return NFT Metadata;
-        // tokenURI(newItemId);
         _setTokenURI(newItemId, finalTokenUri);
 
         // increment tokenId for next mint
