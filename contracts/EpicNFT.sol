@@ -33,6 +33,8 @@ contract EpicNFT is ERC721URIStorage {
         "Salam"
     ];
 
+    event NewEpicNFTMinted(address sender, uint256 tokenId);
+
     constructor() ERC721("DomeNFT", "DOME") {
         console.log("My first NFT contract");
     }
@@ -107,5 +109,7 @@ contract EpicNFT is ERC721URIStorage {
 
         // increment tokenId for next mint
         _tokenIds.increment();
+
+        emit NewEpicNFTMinted(msg.sender, newItemId);
     }
 }
